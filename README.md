@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+# Bite 🍔
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bite is a modern, high-performance food delivery mobile application built with **React Native**, **Expo**, and **NativeWind**. It offers a seamless user experience for browsing menus, searching for favorite meals, and managing a digital shopping cart, all backed by a robust backend using **Appwrite**.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- **Authentication**: Secure user login and registration powered by Appwrite.
+- **Dynamic Menu Browsing**: Explore a wide variety of food options with high-quality images and detailed descriptions.
+- **Advanced Search**: Quickly find the meals you're craving.
+- **Shopping Cart**: Effortlessly add items, manage quantities, and prepare for checkout.
+- **Modern UI/UX**: Beautifully designed interface using Tailwind CSS (NativeWind) for a consistent look and feel across platforms.
+- **State Management**: Fast and scalable state handling with Zustand.
+- **Monitoring**: Error tracking and performance monitoring integrated with Sentry.
 
+## 🚀 Tech Stack
+
+- **Framework**: [Expo](https://expo.dev/) (React Native)
+- **Routing**: [Expo Router](https://docs.expo.dev/router/introduction/) (File-based routing)
+- **Styling**: [NativeWind](https://www.nativewind.dev/) (Tailwind CSS for React Native)
+- **Backend**: [Appwrite](https://appwrite.io/) (Auth, Database, Storage)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Images**: [Expo Image](https://docs.expo.dev/versions/latest/sdk/image/)
+- **Error Tracking**: [Sentry](https://sentry.io/)
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (LTS)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Expo Go](https://expo.dev/go) app on your mobile device (or an emulator/simulator)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/bite.git
+   cd bite
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add your Appwrite and Sentry credentials (see `.env.example` if available).
 
-   ```bash
-   npx expo start
-   ```
+### Running the App
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Start the development server:
 
 ```bash
-npm run reset-project
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Open the **Expo Go** app on your phone and scan the QR code.
+- Press `a` for Android emulator.
+- Press `i` for iOS simulator.
+- Press `w` for web.
 
-## Learn more
+## 📁 Project Structure
 
-To learn more about developing your project with Expo, look at the following resources:
+```text
+├── app/               # Expo Router pages and layouts
+│   ├── (auth)/        # Authentication screens (Sign In/Up)
+│   ├── (tabs)/        # Main app tabs (Home, Search, Cart, Profile)
+│   └── _layout.tsx    # Root layout
+├── components/        # Reusable UI components
+├── constants/         # App constants (images, themes, dummy data)
+├── lib/               # Utility functions and API clients (Appwrite)
+├── store/             # Zustand store definitions
+├── assets/            # Static assets (images, fonts)
+└── tailwind.config.js # Tailwind CSS configuration
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 📝 License
 
-## Join the community
+This project is [MIT](./LICENSE) licensed.
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Built with ❤️ for food lovers.
