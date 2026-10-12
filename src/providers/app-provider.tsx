@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { useAuth } from '@clerk/expo';
 import { ensureGuestPlaces, writeGuestPlaces } from '../lib/demo-store';
 import { createPlace, type Place, type PlaceInput, validatePlaceInput } from '../lib/places';
 
@@ -10,7 +11,7 @@ type AppContextValue = {
   isLoading: boolean;
   error: string | null;
   setGuestSession: () => Promise<void>;
-  setAccountSession: (uid: string) => void;
+  clearGuestSession: () => void;
   signOut: () => void;
   addPlace: (input: PlaceInput) => Promise<void>;
   removePlace: (id: string) => Promise<void>;
@@ -21,37 +22,48 @@ type AppContextValue = {
 const AppContext = createContext<AppContextValue | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [sessionMode, setSessionMode] = useState<SessionMode | null>(null);
+  const { isLoaded, isSignedIn, signOut: clerkSignOut } = useAuth();
+  const [isGuest, setIsGuest] = useState(false);
   const [places, setPlaces] = useState<Place[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isGuestLoading, setIsGuestLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const sessionMode: SessionMode | null = isSignedIn ? 'account' : isGuest ? 'guest' : null;
+  const isLoading = !isLoaded || isGuestLoading;
 
   const setGuestSession = useCallback(async () => {
-    setIsLoading(true);
+    setIsGuestLoading(true);
     try {
       const saved = await ensureGuestPlaces();
-      setSessionMode('guest');
+      setIsGuest(true);
       setPlaces(saved);
       setError(null);
     } catch (guestError) {
-      setError(guestError instanceof Error ? guestError.message : 'Unable to start guest session.');
+      const message = guestError instanceof Error ? guestError.message : 'Unable to start guest session.';
+      setError(message);
+      throw new Error(message);
     } finally {
-      setIsLoading(false);
+      setIsGuestLoading(false);
     }
   }, []);
 
-  const setAccountSession = useCallback((uid: string) => {
-    setSessionMode('account');
+  const clearGuestSession = useCallback(() => {
+    setIsGuest(false);
     setPlaces([]);
     setError(null);
-    void uid;
   }, []);
 
   const signOut = useCallback(() => {
-    setSessionMode(null);
-    setPlaces([]);
-    setError(null);
-  }, []);
+    if (isSignedIn) {
+      void clerkSignOut()
+        .then(clearGuestSession)
+        .catch((signOutError: unknown) => {
+          setError(signOutError instanceof Error ? signOutError.message : 'Unable to sign out.');
+        });
+      return;
+    }
+
+    clearGuestSession();
+  }, [isSignedIn, clerkSignOut, clearGuestSession]);
 
   const addPlace = useCallback(async (input: PlaceInput) => {
     const result = validatePlaceInput(input);
@@ -97,14 +109,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       isLoading,
       error,
       setGuestSession,
-      setAccountSession,
+      clearGuestSession,
       signOut,
       addPlace,
       removePlace,
       toggleVisited,
       clearError,
     }),
-    [sessionMode, places, isLoading, error, setGuestSession, setAccountSession, signOut, addPlace, removePlace, toggleVisited, clearError]
+    [sessionMode, places, isLoading, error, setGuestSession, clearGuestSession, signOut, addPlace, removePlace, toggleVisited, clearError]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

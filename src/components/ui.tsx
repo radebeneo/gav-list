@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, type TextInputProps, View } from 'react-native';
 
 export const colors = {
   paper: '#F7F4EC',
@@ -94,13 +94,24 @@ export function Button({ title, onPress, disabled }: { title: string; onPress?: 
   );
 }
 
-export function Field({ label, value, onChangeText, placeholder, multiline, secureTextEntry }: {
+export function Field({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  multiline,
+  secureTextEntry,
+  keyboardType,
+  autoCapitalize,
+}: {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
   placeholder?: string;
   multiline?: boolean;
   secureTextEntry?: boolean;
+  keyboardType?: TextInputProps['keyboardType'];
+  autoCapitalize?: TextInputProps['autoCapitalize'];
 }) {
   return (
     <View style={{ gap: 8 }}>
@@ -112,6 +123,8 @@ export function Field({ label, value, onChangeText, placeholder, multiline, secu
         placeholderTextColor={colors.muted}
         multiline={multiline}
         secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
         style={[shared.input, multiline && { minHeight: 100, textAlignVertical: 'top' }]}
       />
     </View>

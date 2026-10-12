@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { router } from 'expo-router';
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
+import { Redirect, router } from 'expo-router';
 import { Button, Field, Message, shared } from '../src/components/ui';
 import { PLACE_CATEGORIES, type PlaceInput } from '../src/lib/places';
 import { useApp } from '../src/providers/app-provider';
 
 export default function AddPlaceScreen() {
-  const { addPlace } = useApp();
+  const { addPlace, isLoading, sessionMode } = useApp();
   const [form, setForm] = useState<PlaceInput>({
     name: '',
     address: '',
@@ -33,6 +33,18 @@ export default function AddPlaceScreen() {
       setSaving(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#244F3D" />
+      </View>
+    );
+  }
+
+  if (!sessionMode) {
+    return <Redirect href="/login" />;
+  }
 
   return (
     <ScrollView contentContainerStyle={{ padding: 20, gap: 16 }}>

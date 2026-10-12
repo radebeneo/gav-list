@@ -4,17 +4,17 @@ Gav List is a mobile-first personal places-to-visit app. It lets a user keep a p
 
 ## Features
 
-- Email/password account support via Firebase Auth
+- Email/password authentication via Clerk, including email verification
 - Explicit guest demo mode with local-only storage
 - Save, search, filter, mark visited, and delete places
 - Google Maps search handoff from each saved place
-- Private per-user Firestore data boundaries
 
 ## Tech stack
 
 - Expo / React Native
 - Expo Router
-- Firebase Authentication and Cloud Firestore
+- Clerk Authentication
+- Expo SecureStore for Clerk session tokens
 - AsyncStorage for guest data
 - React Context for session and place state
 
@@ -24,27 +24,27 @@ Gav List is a mobile-first personal places-to-visit app. It lets a user keep a p
 
    npm install
 
-2. Configure your Firebase web/client settings in `.env` or the app config.
+2. Create a Clerk application with email and password sign-in enabled and email verification enabled for sign-up.
 
-3. Start the app:
+3. Add `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY` to `.env` using the publishable key from the Clerk Dashboard. Use `.env.example` as a reference so existing local configuration is preserved.
+
+4. Start the app:
 
    npx expo start
+
+Clerk sessions are persisted using platform secure storage. Guest places remain local to the device. Account sign-in is configured; account place syncing still requires a data backend.
 
 ## Project structure
 
 ```text
 app/                # Expo app entry files
 src/                # Gav List app logic and screens
-  app/              # protected screens and router layout
   components/      # shared UI primitives
-  lib/              # validation, storage, and Firebase helpers
+  lib/              # validation and guest storage helpers
   providers/        # session and places state
   tests/            # node tests for validation and guest storage
-firestore.rules     # Firestore owner-only access rules
 ```
 
 ## Notes
 
-- Account data stays in `users/{uid}/places/{placeId}`.
 - Guest data is kept on-device only and never merges into an account.
-- This repository mirrors the Gav List product requirements documented in `context/` and the local `PRD.md`/`MVP.md` notes.

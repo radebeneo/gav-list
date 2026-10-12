@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Link } from 'expo-router';
-import { Button, colors, shared } from '../src/components/ui';
+import { Button, colors, Message, shared } from '../src/components/ui';
 import { buildGoogleMapsSearchUrl } from '../src/lib/places';
 import { useApp } from '../src/providers/app-provider';
 
 export default function DashboardScreen() {
-  const { places, sessionMode, signOut, toggleVisited, removePlace } = useApp();
+  const { places, sessionMode, isLoading, error, signOut, toggleVisited, removePlace } = useApp();
   const [query, setQuery] = useState('');
 
   const filtered = useMemo(() => {
@@ -19,6 +19,14 @@ export default function DashboardScreen() {
       return haystack.includes(normalized);
     });
   }, [places, query]);
+
+  if (isLoading) {
+    return (
+      <View style={[shared.screen, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={colors.green} />
+      </View>
+    );
+  }
 
   if (!sessionMode) {
     return (
@@ -45,6 +53,8 @@ export default function DashboardScreen() {
         </Pressable>
       </View>
 
+      {error ? <Message text={error} kind="error" /> : null}
+
       <View style={{ marginBottom: 12 }}>
         <Text style={shared.label}>Mode</Text>
         <Text style={shared.body}>{sessionMode === 'guest' ? 'Guest demo · data stays on this device' : 'Account mode'}</Text>
@@ -60,7 +70,7 @@ export default function DashboardScreen() {
       </View>
 
       <Link href="/add-place" asChild>
-        <Pressable style={[shared.action, { marginBottom: 16 }]}>
+        <Pressable style={StyleSheet.flatten([shared.action, { marginBottom: 16 }])}>
           <Text style={shared.actionText}>Add a place</Text>
         </Pressable>
       </Link>
