@@ -179,6 +179,10 @@ export default function SignIn() {
               {needsMfa ? "Verify your identity" : "Welcome back"}
             </Text>
             {needsMfa ? (
+              <View style={{ gap: 16 }}>
+              <>
+              <>
+              <>
               <>
                 {mfaStrategy ? (
                   <Field
@@ -221,9 +225,9 @@ export default function SignIn() {
                   onPress={() => void signOutAndRestart()}
                   disabled={isFetching}
                 />
-              </>
+              </View>
             ) : (
-              <>
+              <View style={{ gap: 16 }}>
                 <Field
                   label="Email"
                   value={email}
@@ -272,7 +276,7 @@ export default function SignIn() {
                   disabled={isFetching}
                 />
                 <View nativeID="clerk-captcha" />
-              </>
+              </View>
             )}
             {needsMfa && errors.fields.code ? (
               <Message text={errors.fields.code.message} kind="error" />

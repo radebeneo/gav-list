@@ -121,6 +121,10 @@ export default function SignUp() {
               {isVerifying ? "Verify your email" : "Create your account"}
             </Text>
             {isVerifying ? (
+              <View style={{ gap: 16 }}>
+              <>
+              <>
+              <>
               <>
                 <Field
                   label="Verification code"
@@ -140,9 +144,9 @@ export default function SignUp() {
                     Resend code
                   </Text>
                 </Pressable>
-              </>
+              </View>
             ) : (
-              <>
+              <View style={{ gap: 16 }}>
                 <Field
                   label="Email"
                   value={email}
@@ -171,7 +175,7 @@ export default function SignUp() {
                   disabled={isFetching || !emailValid || password.length < 8}
                 />
                 <View nativeID="clerk-captcha" />
-              </>
+              </View>
             )}
             {message ? <Message text={message} kind="error" /> : null}
           </View>
