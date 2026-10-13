@@ -4,7 +4,7 @@ Gav List is a mobile-first personal places-to-visit app. It lets a user keep a p
 
 ## Features
 
-- Email/password authentication via Clerk, including email verification
+- Email/password and Google/Apple authentication via Clerk, including email verification
 - Explicit guest demo mode with local-only storage
 - Save, search, filter, mark visited, and delete places
 - Google Maps search handoff from each saved place
@@ -24,7 +24,7 @@ Gav List is a mobile-first personal places-to-visit app. It lets a user keep a p
 
    npm install
 
-2. Create a Clerk application with email and password sign-in enabled and email verification enabled for sign-up.
+2. Create a Clerk application with email and password sign-in, email verification and required first/last name enabled for sign-up, plus the Google and Apple social connections.
 
 3. Add `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY` to `.env` using the publishable key from the Clerk Dashboard. Use `.env.example` as a reference so existing local configuration is preserved.
 

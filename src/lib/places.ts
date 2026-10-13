@@ -1,4 +1,5 @@
 export const PLACE_CATEGORIES = ['Nature', 'Food', 'Culture', 'Adventure', 'Other'] as const;
+export const CATEGORIES = PLACE_CATEGORIES;
 
 export type Category = (typeof PLACE_CATEGORIES)[number];
 
@@ -133,7 +134,7 @@ export function createPlace(input: PlaceInput): Place {
   };
 }
 
-export function buildGoogleMapsSearchUrl(name: string, address: string): string {
+export function buildGoogleMapsSearchUrl(name: string, address: string = ''): string {
   const query = [name, address].filter(Boolean).join(' ');
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }

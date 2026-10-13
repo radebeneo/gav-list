@@ -1,4 +1,5 @@
-export interface MenuItem {
+declare global {
+  interface MenuItem {
     name: string;
     price: number;
     image_url: string;
@@ -7,100 +8,112 @@ export interface MenuItem {
     protein: number;
     rating: number;
     type: string;
-}
+  }
 
-export interface Category {
-    name: string;
-    description: string;
-}
-
-export interface User {
+  interface User {
     name: string;
     email: string;
     avatar: string;
-}
+  }
 
-export interface CartCustomization {
+  interface CartCustomization {
     id: string;
     name: string;
     price: number;
     type: string;
-}
+  }
 
-export interface CartItemType {
-    id: string; // menu item id
+  interface CartItemType {
+    id: string;
     name: string;
     price: number;
     image_url: string;
     quantity: number;
     customizations?: CartCustomization[];
-}
+  }
 
-export interface CartStore {
-    items: CartItem[];
-    addItem: (item: Omit<CartItem, "quantity">) => void;
-    removeItem: (id: string, customizations: CartCustomization[]) => void;
-    increaseQty: (id: string, customizations: CartCustomization[]) => void;
-    decreaseQty: (id: string, customizations: CartCustomization[]) => void;
-    clearCart: () => void;
-    getTotalItems: () => number;
-    getTotalPrice: () => number;
-}
-
-interface TabBarIconProps {
+  interface TabBarIconProps {
     focused: boolean;
-    icon: ImageSourcePropType;
+    icon: any;
     title: string;
-}
+  }
 
-interface PaymentInfoStripeProps {
-    label: string;
-    value: string;
-    labelStyle?: string;
-    valueStyle?: string;
-}
+  interface TabIconProps {
+    focused: boolean;
+    icon: any;
+  }
 
-interface CustomButtonProps {
-    onPress?: () => void;
-    title?: string;
-    style?: string;
-    leftIcon?: React.ReactNode;
-    textStyle?: string;
-    isLoading?: boolean;
-}
-
-interface CustomHeaderProps {
-    title?: string;
-}
-
-interface CustomInputProps {
-    placeholder?: string;
-    value?: string;
-    onChangeText?: (text: string) => void;
-    label: string;
-    secureTextEntry?: boolean;
-    keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
-}
-
-interface ProfileFieldProps {
-    label: string;
-    value: string;
-    icon: ImageSourcePropType;
-}
-
-interface CreateUserParams {
-    email: string;
-    password: string;
+  interface AppTab {
     name: string;
-}
+    title: string;
+    icon: any;
+  }
 
-interface SignInParams {
-    email: string;
-    password: string;
-}
+  interface ListHeadingProps {
+    title: string;
+    onPress?: () => void;
+    actionLabel?: string;
+  }
 
-export interface GetMenuParams {
+  interface Subscription {
+    id: string;
+    name: string;
+    address?: string;
+    location?: string;
+    category: string;
+    notes?: string;
+    visited?: boolean;
+    status?: string;
+    createdAt?: number;
+    icon?: any;
+    price?: number;
+    currency?: string;
+    billing?: string;
+    plan?: string;
+    paymentMethod?: string;
+    startDate?: string;
+    renewalDate?: string | null;
+    mapsUrl?: string;
+  }
+
+  interface SubscriptionCardProps {
+    id?: string;
+    name: string;
+    address?: string;
+    location?: string;
     category?: string;
-    query?: string;
-    limit?: number;
+    notes?: string;
+    visited?: boolean;
+    status?: string;
+    icon?: any;
+    price?: number;
+    currency?: string;
+    billing?: string;
+    plan?: string;
+    paymentMethod?: string;
+    startDate?: string;
+    renewalDate?: string | null;
+    expanded?: boolean;
+    color?: string;
+    onPress?: () => void;
+    onMapPress?: () => void;
+    onToggleVisited?: () => void;
+    onDelete?: () => void;
+  }
+
+  interface UpcomingSubscriptionCardProps {
+    id?: string;
+    name: string;
+    address?: string;
+    location?: string;
+    category?: string;
+    daysLeft?: number;
+    price?: number;
+    currency?: string;
+    icon?: any;
+    visited?: boolean;
+    onPress?: () => void;
+  }
 }
+
+export {};

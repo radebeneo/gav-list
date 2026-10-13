@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    body {
+        @apply bg-background font-sans text-foreground;
+    }
+}
+
 @layer utilities {
     .flex-center {
         @apply flex items-center justify-center;
@@ -46,11 +52,11 @@
     }
 
     .label {
-        @apply text-base text-start w-full font-quicksand-medium text-gray-500 pl-2;
+        @apply text-base text-start w-full font-poppins-medium text-gray-500 pl-2;
     }
 
     .input {
-        @apply rounded-lg p-3 w-full text-base font-quicksand-semibold text-dark-100 border-b leading-5;
+        @apply rounded-lg p-3 w-full text-base font-poppins-semibold text-dark-100 border-b leading-5;
     }
 
     .filter {
@@ -70,7 +76,7 @@
     }
 
     .searchbar {
-        @apply relative flex flex-row items-center justify-center w-full bg-white shadow-md shadow-black/10 rounded-full  font-quicksand-medium text-dark-100 gap-5;
+        @apply relative flex flex-row items-center justify-center w-full bg-white shadow-md shadow-black/10 rounded-full  font-poppins-medium text-dark-100 gap-5;
     }
 
     .tab-icon {
@@ -94,46 +100,46 @@
     }
 
     .h1-bold {
-        @apply text-3xl font-quicksand-bold;
+        @apply text-3xl font-poppins-bold;
     }
 
     .h3-bold {
-        @apply text-xl font-quicksand-bold;
+        @apply text-xl font-poppins-bold;
     }
 
     .base-bold {
-        @apply text-lg font-quicksand-bold !important;
+        @apply text-lg font-poppins-bold !important;
     }
 
     .base-semibold {
-        @apply text-lg font-quicksand-semibold;
+        @apply text-lg font-poppins-semibold;
     }
 
     .base-regular {
-        @apply text-lg font-quicksand;
+        @apply text-lg font-poppins;
     }
 
     .paragraph-bold {
-        @apply text-base font-quicksand-bold;
+        @apply text-base font-poppins-bold;
     }
 
     .paragraph-semibold {
-        @apply text-base font-quicksand-semibold;
+        @apply text-base font-poppins-semibold;
     }
 
     .paragraph-medium {
-        @apply text-base font-quicksand-medium;
+        @apply text-base font-poppins-medium;
     }
 
     .body-medium {
-        @apply text-sm font-quicksand-medium;
+        @apply text-sm font-poppins-medium;
     }
 
     .body-regular {
-        @apply text-sm font-quicksand;
+        @apply text-sm font-poppins;
     }
 
     .small-bold {
-        @apply text-xs font-quicksand-bold;
+        @apply text-xs font-poppins-bold;
     }
 }

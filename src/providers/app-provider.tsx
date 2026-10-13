@@ -13,9 +13,11 @@ type AppContextValue = {
   setGuestSession: () => Promise<void>;
   clearGuestSession: () => void;
   signOut: () => void;
-  addPlace: (input: PlaceInput) => Promise<void>;
+  addPlace: (input: PlaceInput) => Promise<Place>;
+  updatePlace: (id: string, input: Partial<PlaceInput>) => Promise<Place | null>;
   removePlace: (id: string) => Promise<void>;
   toggleVisited: (id: string) => Promise<void>;
+  getPlace: (id: string) => Place | undefined;
   clearError: () => void;
 };
 
@@ -65,7 +67,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     clearGuestSession();
   }, [isSignedIn, clerkSignOut, clearGuestSession]);
 
-  const addPlace = useCallback(async (input: PlaceInput) => {
+  const addPlace = useCallback(async (input: PlaceInput): Promise<Place> => {
     const result = validatePlaceInput(input);
     if (!result.ok) {
       throw new Error(result.errors.join(' '));
@@ -78,6 +80,42 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     if (sessionMode === 'guest') {
       await writeGuestPlaces(updated);
     }
+    return next;
+  }, [places, sessionMode]);
+
+  const updatePlace = useCallback(async (id: string, input: Partial<PlaceInput>): Promise<Place | null> => {
+    let updatedItem: Place | null = null;
+    const updated = places.map((place) => {
+      if (place.id !== id) return place;
+      const merged = {
+        name: input.name ?? place.name,
+        address: input.address ?? place.address,
+        category: input.category ?? place.category,
+        notes: input.notes !== undefined ? input.notes : place.notes,
+        visited: input.visited !== undefined ? input.visited : place.visited,
+      };
+      const validation = validatePlaceInput(merged);
+      if (!validation.ok) {
+        throw new Error(validation.errors.join(' '));
+      }
+      updatedItem = {
+        ...place,
+        name: validation.value.name,
+        address: validation.value.address,
+        category: validation.value.category,
+        notes: validation.value.notes,
+        visited: validation.value.visited ?? false,
+      };
+      return updatedItem;
+    });
+
+    if (updatedItem) {
+      setPlaces(updated);
+      if (sessionMode === 'guest') {
+        await writeGuestPlaces(updated);
+      }
+    }
+    return updatedItem;
   }, [places, sessionMode]);
 
   const removePlace = useCallback(async (id: string) => {
@@ -100,6 +138,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   }, [places, sessionMode]);
 
+  const getPlace = useCallback((id: string): Place | undefined => {
+    return places.find((place) => place.id === id);
+  }, [places]);
+
   const clearError = useCallback(() => setError(null), []);
 
   const value = useMemo<AppContextValue>(
@@ -112,11 +154,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       clearGuestSession,
       signOut,
       addPlace,
+      updatePlace,
       removePlace,
       toggleVisited,
+      getPlace,
       clearError,
     }),
-    [sessionMode, places, isLoading, error, setGuestSession, clearGuestSession, signOut, addPlace, removePlace, toggleVisited, clearError]
+    [sessionMode, places, isLoading, error, setGuestSession, clearGuestSession, signOut, addPlace, updatePlace, removePlace, toggleVisited, getPlace, clearError]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

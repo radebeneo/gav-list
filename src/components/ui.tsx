@@ -1,17 +1,18 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, TextInput, type TextInputProps, View } from 'react-native';
+import { colors as themeColors } from '../config/theme';
 
 export const colors = {
-  paper: '#F7F4EC',
-  white: '#FFFFFF',
-  ink: '#203B30',
-  muted: '#64736A',
-  green: '#244F3D',
-  lime: '#DCEAAB',
-  line: '#DCDDD2',
-  orange: '#B45732',
-  pale: '#E9EDDF',
-  error: '#9D3329',
+  paper: themeColors.background,
+  white: themeColors.card,
+  ink: themeColors.foreground,
+  muted: themeColors.mutedForeground,
+  green: themeColors.primary,
+  lime: themeColors.subscription,
+  line: themeColors.border,
+  orange: themeColors.accent,
+  pale: themeColors.muted,
+  error: themeColors.destructive,
 };
 
 export const shared = StyleSheet.create({
@@ -30,7 +31,7 @@ export const shared = StyleSheet.create({
   label: {
     color: colors.ink,
     fontSize: 12,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     letterSpacing: 0.4,
     textTransform: 'uppercase',
   },
@@ -38,17 +39,18 @@ export const shared = StyleSheet.create({
     color: colors.ink,
     fontSize: 16,
     lineHeight: 22,
+    fontFamily: 'Poppins-Regular',
   },
   title: {
     color: colors.ink,
     fontSize: 28,
-    fontWeight: '700',
-    fontFamily: 'Georgia',
+    fontFamily: 'Poppins-Bold',
   },
   caption: {
     color: colors.muted,
     fontSize: 14,
     lineHeight: 20,
+    fontFamily: 'Poppins-Regular',
   },
   action: {
     backgroundColor: colors.green,
@@ -61,7 +63,7 @@ export const shared = StyleSheet.create({
   actionText: {
     color: colors.white,
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   input: {
     borderWidth: 1,
@@ -73,12 +75,12 @@ export const shared = StyleSheet.create({
     paddingVertical: 12,
     color: colors.ink,
     fontSize: 16,
+    fontFamily: 'Poppins-Medium',
   },
   sectionTitle: {
     color: colors.ink,
     fontSize: 22,
-    fontWeight: '700',
-    fontFamily: 'Georgia',
+    fontFamily: 'Poppins-Bold',
   },
 });
 
@@ -150,8 +152,7 @@ const styles = StyleSheet.create({
   brand: {
     color: colors.green,
     fontSize: 30,
-    fontFamily: 'Georgia',
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     marginBottom: 12,
   },
   disabled: {
