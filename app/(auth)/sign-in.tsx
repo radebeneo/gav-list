@@ -180,10 +180,6 @@ export default function SignIn() {
             </Text>
             {needsMfa ? (
               <View style={{ gap: 16 }}>
-              <>
-              <>
-              <>
-              <>
                 {mfaStrategy ? (
                   <Field
                     label={mfaStrategy === "backup_code" ? "Backup code" : "Verification code"}

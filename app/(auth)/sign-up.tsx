@@ -122,10 +122,6 @@ export default function SignUp() {
             </Text>
             {isVerifying ? (
               <View style={{ gap: 16 }}>
-              <>
-              <>
-              <>
-              <>
                 <Field
                   label="Verification code"
                   value={code}
