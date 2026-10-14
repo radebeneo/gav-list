@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, colors, Field, Message, shared } from "../../src/components/ui";
+import { SocialAuth } from "../../src/components/social-auth";
 import { useApp } from "../../src/providers/app-provider";
 import {
   getAuthErrorMessage,
@@ -164,7 +165,7 @@ export default function SignIn() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView
-          contentContainerStyle={[shared.screen, { justifyContent: "center", gap: 16 }]}
+          contentContainerStyle={[shared.screen, { flex: undefined, flexGrow: 1, justifyContent: "center", gap: 16 }]}
           keyboardShouldPersistTaps="handled"
         >
           <Text style={shared.title}>Gav List</Text>
@@ -180,10 +181,6 @@ export default function SignIn() {
             </Text>
             {needsMfa ? (
               <View style={{ gap: 16 }}>
-              <>
-              <>
-              <>
-              <>
                 {mfaStrategy ? (
                   <Field
                     label={mfaStrategy === "backup_code" ? "Backup code" : "Verification code"}
@@ -256,6 +253,7 @@ export default function SignIn() {
                   onPress={() => void submitSignIn()}
                   disabled={isFetching || !email.trim() || !password}
                 />
+                <SocialAuth disabled={isFetching} redirectPath="sign-in" />
                 <Link href={"/(auth)/reset-password" as Href} asChild>
                   <Pressable>
                     <Text style={{ color: colors.green, fontWeight: "700", textAlign: "center" }}>
