@@ -159,8 +159,8 @@ export default function ResetPassword() {
           contentContainerStyle={[shared.screen, { justifyContent: "center", gap: 16 }]}
           keyboardShouldPersistTaps="handled"
         >
-          <Text style={shared.title}>Gav List</Text>
-          <Text style={shared.caption}>{title}</Text>
+           <Text style={[shared.title, { textAlign: "center" }]}>Gav List</Text>
+           <Text style={[shared.caption, { textAlign: "center" }]}>{title}</Text>
           <View style={[shared.card, { gap: 16 }]}>
             {step === "email" ? (
               <Field

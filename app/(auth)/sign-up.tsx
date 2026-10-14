@@ -110,15 +110,15 @@ export default function SignUp() {
           contentContainerStyle={[shared.screen, { flex: undefined, flexGrow: 1, justifyContent: "center", gap: 16 }]}
           keyboardShouldPersistTaps="handled"
         >
-          <Text style={shared.title}>Gav List</Text>
-          <Text style={shared.caption}>
-            {isVerifying
-              ? `Enter the verification code sent to ${email.trim()}.`
-              : "Create an account to keep your saved places with you."}
-          </Text>
+           <Text style={[shared.title, { textAlign: "center" }]}>Gav List</Text>
+           <Text style={[shared.caption, { textAlign: "center" }]}>
+             {isVerifying
+               ? `Enter the verification code sent to ${email.trim()}.`
+               : "Create an account to keep your saved places with you."}
+           </Text>
 
-          <View style={[shared.card, { gap: 16 }]}>
-            <Text style={shared.sectionTitle}>
+           <View style={[shared.card, { gap: 16 }]}>
+             <Text style={[shared.sectionTitle, { textAlign: "center" }]}>
               {isVerifying ? "Verify your email" : "Create your account"}
             </Text>
             {isVerifying ? (

@@ -53,9 +53,9 @@ export default function SessionTask() {
   return (
     <SafeAreaView style={[shared.screen, { justifyContent: "center" }]}>
       <View style={[shared.card, { gap: 16 }]}>
-        <Text style={shared.title}>{copy.title}</Text>
-        <Text style={shared.body}>{copy.description}</Text>
-        <Text style={shared.caption}>
+         <Text style={[shared.title, { textAlign: "center" }]}>{copy.title}</Text>
+         <Text style={shared.body}>{copy.description}</Text>
+         <Text style={[shared.caption, { textAlign: "center" }]}>
           Gav List will keep your account protected until Clerk confirms this step is complete.
         </Text>
         {message ? <Message text={message} kind="error" /> : null}

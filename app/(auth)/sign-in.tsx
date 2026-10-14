@@ -168,15 +168,15 @@ export default function SignIn() {
           contentContainerStyle={[shared.screen, { flex: undefined, flexGrow: 1, justifyContent: "center", gap: 16 }]}
           keyboardShouldPersistTaps="handled"
         >
-          <Text style={shared.title}>Gav List</Text>
-          <Text style={shared.caption}>
-            {needsMfa
-              ? "Verify your identity to continue to your saved places."
-              : "Keep your favorite places in one list, wherever you go."}
-          </Text>
+           <Text style={[shared.title, { textAlign: "center" }]}>Gav List</Text>
+           <Text style={[shared.caption, { textAlign: "center" }]}>
+             {needsMfa
+               ? "Verify your identity to continue to your saved places."
+               : "Keep your favorite places in one list, wherever you go."}
+           </Text>
 
-          <View style={[shared.card, { gap: 16 }]}>
-            <Text style={shared.sectionTitle}>
+           <View style={[shared.card, { gap: 16 }]}>
+             <Text style={[shared.sectionTitle, { textAlign: "center" }]}>
               {needsMfa ? "Verify your identity" : "Welcome back"}
             </Text>
             {needsMfa ? (
