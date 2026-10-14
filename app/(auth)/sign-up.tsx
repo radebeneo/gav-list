@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, colors, Field, Message, shared } from "../../src/components/ui";
+import { SocialAuth } from "../../src/components/social-auth";
 import { useApp } from "../../src/providers/app-provider";
 import { getAuthErrorMessage } from "../../src/lib/auth-state";
 
@@ -106,7 +107,7 @@ export default function SignUp() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView
-          contentContainerStyle={[shared.screen, { justifyContent: "center", gap: 16 }]}
+          contentContainerStyle={[shared.screen, { flex: undefined, flexGrow: 1, justifyContent: "center", gap: 16 }]}
           keyboardShouldPersistTaps="handled"
         >
           <Text style={shared.title}>Gav List</Text>
@@ -170,6 +171,7 @@ export default function SignUp() {
                   onPress={() => void createAccount()}
                   disabled={isFetching || !emailValid || password.length < 8}
                 />
+                <SocialAuth disabled={isFetching} redirectPath="sign-up" />
                 <View nativeID="clerk-captcha" />
               </View>
             )}
