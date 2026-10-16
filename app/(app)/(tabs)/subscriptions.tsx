@@ -1,4 +1,5 @@
 import CreateSubscriptionModal from "@/components/CreateSubscriptionModal";
+import EmptyStateArtwork from "@/components/EmptyStateArtwork";
 import SubscriptionCard from "@/components/SubscriptionCard";
 import SubscriptionStateView from "@/components/SubscriptionStateView";
 import { type Category, CATEGORIES } from "@/lib/places";
@@ -182,6 +183,7 @@ export default function SavedPlaces() {
           keyboardDismissMode="on-drag"
           ListEmptyComponent={
             <View className="items-center justify-center rounded-3xl border border-dashed border-border bg-card p-8">
+              <EmptyStateArtwork />
               <Text className="text-center text-base font-sans-semibold text-muted-foreground">
                 {searchQuery || selectedCategory !== "All" || statusFilter !== "all"
                   ? "No places match your selected filters."

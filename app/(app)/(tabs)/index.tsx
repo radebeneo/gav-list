@@ -2,6 +2,7 @@ import Feather from "@expo/vector-icons/Feather";
 import Avatar from "../../../assets/images/avatar.svg";
 import Details from "../../../assets/icons/details.svg";
 import CreateSubscriptionModal from "@/components/CreateSubscriptionModal";
+import EmptyStateArtwork from "@/components/EmptyStateArtwork";
 import SubscriptionStateView from "@/components/SubscriptionStateView";
 import { colors } from "@/config/theme";
 import { type Category, CATEGORIES } from "@/lib/places";
@@ -239,8 +240,9 @@ export default function Home() {
             }}
           />
         ) : (
-          <View className="mb-5 rounded-2xl bg-card p-4">
-            <Text className="text-sm font-sans-medium text-muted-foreground">
+          <View className="mb-5 items-center rounded-2xl bg-card p-4">
+            <EmptyStateArtwork />
+            <Text className="text-center text-sm font-sans-medium text-muted-foreground">
               {searchQuery || selectedCategory !== "All"
                 ? "No places match your filters."
                 : "Your next adventure starts here."}
@@ -332,20 +334,12 @@ export default function Home() {
             ))
           ) : (
             <View className="items-center rounded-2xl bg-card p-5">
+              <EmptyStateArtwork />
               <Text className="text-sm font-sans-medium text-muted-foreground">
                 {searchQuery
                   ? `No places found matching "${searchQuery}".`
                   : "No saved places yet."}
               </Text>
-              <Pressable
-                onPress={() => setCreateVisible(true)}
-                className="mt-3 rounded-full bg-primary px-4 py-2.5"
-                accessibilityRole="button"
-              >
-                <Text className="text-xs font-sans-semibold text-white">
-                  Save your first place
-                </Text>
-              </Pressable>
             </View>
           )}
         </View>

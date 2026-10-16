@@ -1,4 +1,5 @@
 import CreateSubscriptionModal from "@/components/CreateSubscriptionModal";
+import EmptyStateArtwork from "@/components/EmptyStateArtwork";
 import SubscriptionIcon from "@/components/SubscriptionIcon";
 import {
   formatPlaceDate,
@@ -60,6 +61,7 @@ export default function PlaceDetailsScreen() {
   if (!id || !place) {
     return (
       <SafeAreaView className="flex-1 items-center justify-center bg-background p-6">
+        <EmptyStateArtwork />
         <Text className="text-center text-2xl font-sans-bold text-primary">
           Place not found
         </Text>

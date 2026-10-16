@@ -1,4 +1,5 @@
 import CreateSubscriptionModal from "@/components/CreateSubscriptionModal";
+import EmptyStateArtwork from "@/components/EmptyStateArtwork";
 import SubscriptionIcon from "@/components/SubscriptionIcon";
 import SubscriptionStateView from "@/components/SubscriptionStateView";
 import {
@@ -45,6 +46,7 @@ const Details = () => {
     return (
       <SafeAreaView className="flex-1 bg-background p-6" edges={["top", "left", "right"]}>
         <View className="flex-1 items-center justify-center">
+          <EmptyStateArtwork />
           <Text className="text-center text-2xl font-sans-bold text-primary">
             No Place Selected
           </Text>
